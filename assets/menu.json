@@ -1,0 +1,50 @@
+[
+    {
+      "title": "数据仪表板",
+      "svgSrc": "assets/icons/menu_dashbord.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "基础数据",
+      "svgSrc": "assets/icons/menu_store.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "采购处理",
+      "svgSrc": "assets/icons/menu_task.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "入出库业务",
+      "svgSrc": "assets/icons/menu_tran.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "报表统计",
+      "svgSrc": "assets/icons/menu_doc.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "系统设置",
+      "svgSrc": "assets/icons/menu_notification.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "个人信息",
+      "svgSrc": "assets/icons/menu_profile.svg",
+      "page": "",
+      "args": ""
+    },
+    {
+      "title": "退出登录",
+      "svgSrc": "assets/icons/menu_setting.svg",
+      "page": "",
+      "args": ""
+    }
+]
