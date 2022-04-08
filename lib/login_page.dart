@@ -37,98 +37,100 @@ class LoginPage extends StatelessWidget {
           ),
           backgroundColor: GlobalConst.primaryColor),
       body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              child: Stack(
-                children: [
-                  Opacity(
-                    opacity: 0.5,
-                    child: ClipPath(
-                      clipper: WaveClipper(),
-                      child: Container(
-                        color: GlobalConst.primaryColor,
-                        height: 130,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                child: Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.5,
+                      child: ClipPath(
+                        clipper: WaveClipper(),
+                        child: Container(
+                          color: GlobalConst.primaryColor,
+                          height: 130,
+                        ),
                       ),
                     ),
-                  ),
-                  Opacity(
-                    opacity: 1,
-                    child: ClipPath(
-                      clipper: WaveClipper(),
-                      child: Container(
-                        color: GlobalConst.primaryColor,
-                        height: 110,
+                    Opacity(
+                      opacity: 1,
+                      child: ClipPath(
+                        clipper: WaveClipper(),
+                        child: Container(
+                          color: GlobalConst.primaryColor,
+                          height: 110,
+                        ),
                       ),
                     ),
-                  ),
-                  Center(
-                    heightFactor: 1,
-                    child: '系统登录'
-                        .toLabel(
-                            bold: true,
-                            fontsize: GlobalConst.globalTitleTextSize,
-                            color: GlobalConst.textGreyColor)
-                        .margin9,
-                  ),
-                ],
+                    Center(
+                      heightFactor: 1,
+                      child: '系统登录'
+                          .toLabel(
+                              bold: true,
+                              fontsize: GlobalConst.globalTitleTextSize,
+                              color: GlobalConst.textGreyColor)
+                          .margin9,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.3 < 350
-                  ? 300
-                  : MediaQuery.of(context).size.width * 0.35,
-              child: Column(
-                children: [
-                  MyEdit(
-                    controller: usernameTxtController,
-                    hint: '请输入登录账号',
-                  ).margin3,
-                  MyEdit(
-                    controller: passwordTxtController,
-                    hint: '请输入密码',
-                    password: true,
-                  ).margin3,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MyButton(
-                        title: '注 册',
-                        onTap: () =>
-                            myGetSnackBar(title: '提示', message: '尚不允许公开注册～哟！'),
-                        color: GlobalConst.primaryColor,
-                        padding: EdgeInsets.all(
-                            GlobalConst.globalPaddingSizeBase * 6),
-                        icon: Icon(
-                          Icons.edit,
-                        ),
-                      ).padding9,
-                      MyButton(
-                        title: '登 录',
-                        onTap: () async {
-                          bool islogin = await controller.login(
-                              usernameTxtController.text,
-                              passwordTxtController.text);
-                          if (islogin) {
-                            //TODO 需要替换成  Get.Off
-                            Get.to(() => HomePage());
-                          }
-                        },
-                        color: GlobalConst.globalGreen,
-                        padding: EdgeInsets.all(
-                            GlobalConst.globalPaddingSizeBase * 6),
-                        icon: Icon(
-                          Icons.vpn_key,
-                          color: GlobalConst.textGreyColor,
-                        ),
-                      ).margin9,
-                    ],
-                  ),
-                ],
-              ).padding9.margin9.card.center,
-            ),
-          ],
-        ).center,
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3 < 350
+                    ? 300
+                    : MediaQuery.of(context).size.width * 0.35,
+                child: Column(
+                  children: [
+                    MyEdit(
+                      controller: usernameTxtController,
+                      hint: '请输入登录账号',
+                    ).margin3,
+                    MyEdit(
+                      controller: passwordTxtController,
+                      hint: '请输入密码',
+                      password: true,
+                    ).margin3,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyButton(
+                          title: '注 册',
+                          onTap: () =>
+                              myGetSnackBar(title: '提示', message: '尚不允许公开注册～哟！'),
+                          color: GlobalConst.primaryColor,
+                          padding: EdgeInsets.all(
+                              GlobalConst.globalPaddingSizeBase * 6),
+                          icon: Icon(
+                            Icons.edit,
+                          ),
+                        ).padding9,
+                        MyButton(
+                          title: '登 录',
+                          onTap: () async {
+                            bool islogin = await controller.login(
+                                usernameTxtController.text,
+                                passwordTxtController.text);
+                            if (islogin) {
+                              //TODO 需要替换成  Get.Off
+                              Get.to(() => HomePage());
+                            }
+                          },
+                          color: GlobalConst.globalGreen,
+                          padding: EdgeInsets.all(
+                              GlobalConst.globalPaddingSizeBase * 6),
+                          icon: Icon(
+                            Icons.vpn_key,
+                            color: GlobalConst.textGreyColor,
+                          ),
+                        ).margin9,
+                      ],
+                    ),
+                  ],
+                ).padding9.margin9.card.center,
+              ),
+            ],
+          ).center,
+        ),
       ),
     );
   }

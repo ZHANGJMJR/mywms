@@ -43,8 +43,14 @@
     },
     {
       "title": "退出登录",
-      "svgSrc": "assets/icons/menu_setting.svg",
+      "svgSrc": "assets/icons/menu_exit.svg",
       "page": "",
       "args": ""
     }
 ]
+ssh-keygen -t rsa -b 4096 -C "zhangjmjr@gmail.com"
+
+
+ssh-key add ~/.ssh/id_rsa.pub
+
+git remote set-url origin git@github.com:ZHANGJMJR/mywms.git

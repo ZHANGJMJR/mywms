@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../module/menu.dart';
 class SideMenuController extends GetxController {
 RxList<Menu> menuList=RxList<Menu>([]);
+var selectedMenuIndex = 0.obs;
+
 var loaded=false.obs;
 @override
   void onInit() {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mywms/screens/basicdata_page.dart';
+import 'package:mywms/screens/homepage.dart';
 import 'package:mywms/utils/responsive.dart';
 import 'package:mywms/values/constants.dart';
 import '../controller/sidemenu_controller.dart';
@@ -14,7 +15,15 @@ class SideMenu extends StatelessWidget {
   SideMenu({Key? key, this.selectMenuIndex = 0}) : super(key: key);
 
   gotoPage(String menuName) {
+
     switch(menuName) {
+      case '数据仪表板': {
+        return () {
+          Get.off(HomePage());
+        };
+      }
+      break;
+
       case '基础数据': {
         return () {
           Get.off(BasicDataPage(menuSelectIndex: 1,));
@@ -90,11 +99,12 @@ class SideMenu extends StatelessWidget {
                 itemCount: sideMenuController.menuList.value.length,
                 itemBuilder: (BuildContext context, int p) {
                   return DrawerListTile(
+                    index: p,
                     title: sideMenuController.menuList.value[p].title!,
                     svgSrc: sideMenuController.menuList.value[p].svgSrc!,
-                    color: selectMenuIndex == p ? Colors.amber : null,
-                    press:
-                        gotoPage(sideMenuController.menuList.value[p].title!),
+                    color: sideMenuController.selectedMenuIndex.value==p?Colors.amber : null, //selectMenuIndex == p ? Colors.amber : null,
+                    press:(){sideMenuController.selectedMenuIndex.value=p;},
+                        //gotoPage(sideMenuController.menuList.value[p].title!),
                   );
                 },
               )
@@ -108,34 +118,58 @@ class DrawerListTile extends StatelessWidget {
   const DrawerListTile(
       {Key? key,
       // For selecting those three line once press "Command+D"
+     required   this.index,
       required this.title,
       required this.svgSrc,
       required this.press,
       this.color})
       : super(key: key);
-
+  final int index;
   final Color? color;
   final String title, svgSrc;
   final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: press,
-      tileColor: color,
-      horizontalTitleGap: 0.0,
-      hoverColor: Colors.purple,
-      focusColor: Colors.greenAccent,
-      selectedColor: GlobalConst.primaryColor,
-      leading: SvgPicture.asset(
-        svgSrc,
-        color: Colors.black,
-        height: 16,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.black),
-      ),
-    );
+    SideMenuController _sideMenuController = Get.find<SideMenuController>();
+    return Obx((){if(_sideMenuController.selectedMenuIndex.value==index){
+     return  ListTile(
+        onTap: press,
+        tileColor: Colors.amber,
+        horizontalTitleGap: 0.0,
+        hoverColor: Colors.purple,
+        focusColor: Colors.greenAccent,
+        selectedColor: GlobalConst.primaryColor,
+        leading: SvgPicture.asset(
+          svgSrc,
+          color: Colors.black,
+          height: 16,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.black),
+        ),
+      );
+    }else{
+      return  ListTile(
+        onTap: press,
+        tileColor: null,
+        horizontalTitleGap: 0.0,
+        hoverColor: Colors.purple,
+        focusColor: Colors.greenAccent,
+        selectedColor: GlobalConst.primaryColor,
+        leading: SvgPicture.asset(
+          svgSrc,
+          color: Colors.black,
+          height: 16,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.black),
+        ),
+      );
+    }
+    })
+    ;
   }
 }
