@@ -36,35 +36,65 @@ class CategoryGrid extends StatelessWidget {
 
     return Column(
       children: [
-        ElevatedButton(
-            onPressed: () {
-              myDialog.show();
-            },
-            child: 'show dialog'.toLabel(fontsize: 20)),
         Form(
             child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
               controller: _categoryController.idController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'ID', border: OutlineInputBorder()),
               enabled: false,
-            ).margin3.hPadding9.hPadding9.hPadding9,
+            ).margin3.hPadding9.hPadding9,
             TextFormField(
               controller: _categoryController.titleController,
-              validator: (value){
-                  if(value!=null && value!.length < 2)
-                  {return '输入有效的分类名称！';}
-                  else{return null;}},
-              decoration: InputDecoration(
+              validator: (value) {
+                if ((value ?? '').length < 2) {
+                  return '输入有效的分类名称！';
+                } else {
+                  return null;
+                }
+              },
+              decoration: const InputDecoration(
                   labelText: '分类名称', border: OutlineInputBorder()),
-
-            ).margin9.hPadding9.hPadding9.hPadding9
+            ).margin9.hPadding9
           ],
-        )).margin9,
+        )).padding6,
+        ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: (int.parse(
+                            _categoryController.idController.text == ''
+                                ? '0'
+                                : _categoryController.idController.text)) >
+                        0
+                    ? // ( (_categoryController.idController.text ??'0') ) > '0'?    // int (_categoryController.idController.text??'0')
+                    MaterialStateProperty.all(const Color(0xFFFFB300))
+                    : MaterialStateProperty.all(const Color(0xFF43A047))),
+            onPressed: () {
+              myDialog.show();
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                (int.parse(_categoryController.idController.text == ''
+                            ? '0'
+                            : _categoryController.idController.text)) >
+                        0
+                    ? const Icon(Icons.edit)
+                    : const Icon(Icons.add),
+                SizedBox(width: 8,),
+                ((int.parse(_categoryController.idController.text == ''
+                                ? '0'
+                                : _categoryController.idController.text)) >
+                            0
+                        ? "修改"
+                        : "新增")
+                    .toLabel(fontsize: 20),
+              ],
+            )),
         Expanded(
           child: SfDataGrid(
+            columnWidthMode: ColumnWidthMode.fill,
             source: _categoryDataGridSource,
             columns: [
               GridColumn(
@@ -78,7 +108,6 @@ class CategoryGrid extends StatelessWidget {
                       ))),
               GridColumn(
                   columnName: 'name',
-                  width: 160,
                   label: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       alignment: Alignment.centerLeft,
