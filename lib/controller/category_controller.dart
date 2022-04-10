@@ -13,14 +13,15 @@ class CategoryController extends GetxController {
   RxList<Category> dataCategory = <Category>[].obs; // 分类的数据列表
   RxInt id = 0.obs;
   RxBool loading = false.obs;
-  Rx<Category> listSelectCategory = Category(0,'','','',0).obs;
+  Rx<Category> listSelectCategory = Category(0,'','',0).obs;
 
+  TextEditingController idController = TextEditingController();
   TextEditingController titleController = TextEditingController();
-  TextEditingController descController = TextEditingController();
+ // TextEditingController descController = TextEditingController();
   TextEditingController iconController = TextEditingController();
 
   TextEditingController addTitleController = TextEditingController();
-  TextEditingController addDescController = TextEditingController();
+ // TextEditingController addDescController = TextEditingController();
   TextEditingController addIconController = TextEditingController();
 
   @override
@@ -38,7 +39,7 @@ class CategoryController extends GetxController {
       if (jsonResponse.isNotEmpty && jsonResponse.length > 0) {
         dataCategory.value =
             jsonResponse.map((e) => Category.fromJson(e)).toList();
-        print(dataCategory.map((e) => e.title));
+        print(dataCategory.map((e) => e.categoryname));
       }
     } else {
       print('Backend error');
@@ -48,14 +49,15 @@ class CategoryController extends GetxController {
 // 新增分类数据
   void addCategory() async {
     var response = await dio.post('category', queryParameters: {
-      'title': addTitleController.text,
-      'desc': addDescController.text,
-      'icon': addIconController.text,
+      'categoryname': addTitleController.text,
+      'categorypic': addIconController.text,
+      'status':0
+      //'icon': addIconController.text,
     });
     if (response.statusCode == 200 && response.data['code'] == 200) {
       readCategory();
       addTitleController.clear();
-      addDescController.clear();
+      //addDescController.clear();
       addIconController.clear();
     } else {
       myGetSnackBar(
@@ -123,9 +125,9 @@ class CategoryController extends GetxController {
   void editCategory(int id)async{
     var response = await dio.post('category', queryParameters: {
       'id': id.toString(),
-      'title':titleController.text,
-      'desc':descController.text,
-      'icon':iconController.text,
+      'categoryname':titleController.text,
+      'categorypic':iconController.text,
+      'status':0//iconController.text,
 
     });
       if(response.statusCode==200){
