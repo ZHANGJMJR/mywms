@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       //   primarySwatch: Colors.deepOrange,
       // ),
       home: GetBuilder<LoginController>(builder: (_){
-        return  _.checkByLogin?LoginPage():HomePage();
+        return _.checkByLogin?LoginPage():HomePage();
       },)
 
 

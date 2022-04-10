@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 
-import '../utils/responsive.dart';
-import '../widgets/side_menu.dart';
+import '../../utils/responsive.dart';
+import '../../widgets/side_menu.dart';
 import '/widgets/mywidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:mywms/widgets/myextension.dart';
@@ -46,7 +46,7 @@ class BasicDataPage extends StatelessWidget{
                         box.remove("personlocked");
                         box.remove("personid");
                         print(box.read('personlocked').toString() +
-                            " aaaaa  home page");
+                            " bbbbb  basic page");
                       },
                     ),
                   ),
