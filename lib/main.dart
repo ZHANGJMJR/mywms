@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '/controller/LoginController.dart';
 import '/values/lib_color_schemes.g.dart';
+import 'controller/sidemenu_controller.dart';
 import 'login_page.dart';
 // LoginController loginController =  Get.put(LoginController());
 
@@ -17,12 +18,23 @@ void main() async{
 
 
 class MyApp extends StatelessWidget {
+  final appPages=[
+    GetPage(
+      name: '/',
+      page: () => LoginPage(),
+    ),
+    GetPage(
+      name: '/home',
+      page: () => HomePage(),
+    ),
+  ];
   // This widget is the root of your application.
   final LoginController _logincontroller = Get.put(LoginController());
+  final SideMenuController sideMenuController= Get.put(SideMenuController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Design-项目',
+      title: 'zxf Design-项目',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(colorScheme: lightColorScheme),
@@ -30,6 +42,9 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(
       //   primarySwatch: Colors.deepOrange,
       // ),
+
+      // getPages: appPages,
+      // initialRoute: _logincontroller.checkByLogin?'/':'/home',
       home: GetBuilder<LoginController>(builder: (_){
         return _.checkByLogin?LoginPage():HomePage();
       },)

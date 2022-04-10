@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:mywms/login_page.dart';
 import 'package:mywms/utils/responsive.dart';
 import '../controller/sidemenu_controller.dart';
 import 'myextension.dart';
@@ -45,6 +49,14 @@ class SideMenu extends StatelessWidget {
                         : null, //selectMenuIndex == p ? Colors.amber : null,
                     press: () {
                       sideMenuController.selectedMenuIndex.value = p;
+                      Responsive.isMobile(context)?Navigator.pop(context):null;
+                      if(sideMenuController.menuList.value[p].title=='退出登录'){
+                        var _box = GetStorage();
+                        _box.remove("personlocked");
+                        _box.remove("personid");
+                        Get.to(LoginPage());
+                       // exit(0);
+                      }
                     },
                     //gotoPage(sideMenuController.menuList.value[p].title!),
                   );

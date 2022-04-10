@@ -11,31 +11,27 @@ String CategoryToJson(List<Category> data) => json.encode(List<dynamic>.from(dat
 class Category extends Object{  //  物品类别
   Category(
     this.id,
-    this.title,
-    this.desc,
-    this.icon,
+    this.categoryname,
+    this.categorypic,
     this.status,
   );
 
   int id;
-  String title;
-  String desc;
-  String icon;
+  String categoryname;
+  String categorypic;
   int status;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
      json["id"] as int,
-     json["title"] as String,
-     json["desc"] as String,
-     json["icon"] as String,
+     json["categoryname"] as String,
+     json["categorypic"] as String,
      json["status"] as int
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "title": title,
-    "desc": desc,
-    "icon": icon,
+    "categoryname": categoryname,
+    "categorypic": categorypic,
     "status": status,
   };
 }

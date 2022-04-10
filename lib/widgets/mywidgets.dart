@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+
 import '/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'myextension.dart';
@@ -137,3 +139,20 @@ class MyEdit extends StatelessWidget {
         ));
   }
 }
+
+//
+// class MyDialog extends AwesomeDialog {
+//   MyDialog({required BuildContext context}) : super(context: context);
+//   final DialogType dialogType;
+//
+//   // var mydialog=   AwesomeDialog(
+//   //   context: context,
+//   //   dialogType: DialogType.QUESTION,
+//   //   animType: AnimType.BOTTOMSLIDE,
+//   //   title: 'Dialog Title',width: 500,
+//   //   desc: 'Dialog description here.............',
+//   //   btnOkText: '确定',btnCancelText: '取消',
+//   //   btnCancelOnPress: () {},
+//   //   btnOkOnPress: () {},
+//   // );
+// }

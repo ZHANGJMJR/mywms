@@ -16,16 +16,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late SideMenuController sideMenuController;
+   SideMenuController sideMenuController= Get.find<SideMenuController>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    sideMenuController = Get.put(SideMenuController());
+    // sideMenuController
   }
 
-
-  var myindextemp = 0.obs;
+  // var myindextemp = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: Responsive.isMobile(context) ? SideMenu() : null,
       appBar: AppBar(
-        title: Text('首页'),
+        title: Text('SnowBay Inc.'),
       ),
       body: Center(
         child: Row(children: [
@@ -80,20 +79,31 @@ class _HomePageState extends State<HomePage> {
             flex: 4,
             child: Column(
               children: [
-                '数据处理 窗口'.toLabel(color: Colors.black, fontsize: 20),
+                // '数据处理 窗口'.toLabel(color: Colors.black, fontsize: 20),
                 // testC(),
                 Expanded(
                   child: Center(
-                    child: BasicDataPage(),
-                    // MyButton(
-                    //   title: 'aaaa',
-                    //   onTap: () {
-                    //     box.remove("personlocked");
-                    //     box.remove("personid");
-                    //     print(box.read('personlocked').toString() +
-                    //         " aaaaa  home page");
-                    //   },
-                    // ),
+                    child: Obx(() {
+                     switch (sideMenuController.selectedMenuIndex.value) {
+                      // switch (1) {
+                        // case 0:
+                        //   return Container(
+                        //     child: 'dashboard'.toLabel(),
+                        //   );
+                        case 1:
+                          return BasicDataPage();
+                          break;
+                        default:
+                          return Container(
+                            child: sideMenuController
+                                .menuList[
+                                    sideMenuController.selectedMenuIndex.value]
+                                .title
+                                .toString()
+                                .toLabel(color: Colors.pinkAccent),
+                          );
+                      }
+                    }),
                   ),
                 ),
               ],
